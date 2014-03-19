@@ -3,7 +3,7 @@ GraphBase.prototype.barGraph = function(data,yScaleIndex) {
     var graph = this;
 
     // get a list of the unique set of columns
-    var columns = $.map(graphData, function(d) { return d.z})
+    var columns = $.map(data, function(d) { return d.z})
         .filter(function(itm,i,columns) { return i==columns.indexOf(itm); });
 
     // get the colours
@@ -15,7 +15,7 @@ GraphBase.prototype.barGraph = function(data,yScaleIndex) {
 
     // remap the data
     var remapped = columns.map(function(col,i){
-        return $.grep(graphData,function(d) { return (d.z==col); });
+        return $.grep(data,function(d) { return (d.z==col); });
     });
 
     var stacked = d3.layout.stack()(remapped)

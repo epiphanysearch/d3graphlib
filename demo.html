@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script type='text/javascript' src='https://code.jquery.com/jquery-1.11.0.min.js'></script>
+		<script type='text/javascript' src='http://d3js.org/d3.v3.min.js'></script>
+		<script type='text/javascript' src='graph-base.js'></script>
+		<script type='text/javascript' src='x-axis.js'></script>
+		<script type='text/javascript' src='y-axis.js'></script>
+		<script type='text/javascript' src='legend.js'></script>
+		<script type='text/javascript' src='bar-graph.js'></script>
+		<script type='text/javascript' src='line-graph.js'></script>
+
+		<script type='text/javascript'>
+$(function() {
+	var graph = new GraphBase('#graph', {'w':800,'h':700,'oX':100,'oY':300,'topY':50});
+
+	var salesCount = [433,7868,432,987,547];
+	var salesValue = [6564,63344,222,8686,235];
+	var items = ['Widgets','Doohickeys','Wotsits','Thingies','Hoojits'];
+
+	var getData = function(data,xValues) {
+		var gData = [];
+		for(i=0;i<data.length;i++) {
+			gData[i] = { x: xValues[i], y: data[i], z:0 };
+		}
+		return gData;
+	}
+
+	graph
+		.xAxis(items)
+		.yAxis(salesCount,'Items sold')
+		.yAxis(salesValue,'Sales value')
+		.barGraph(getData(salesCount,items),0)
+		.lineGraph(getData(salesValue,items),1);
+});
+
+		</script>
+
+	</head>
+	<body>
+		<div id='graph'></div>
+	</body>
+</html>
